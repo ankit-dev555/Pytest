@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {%load staticfiles%}
+    <link rel="stylesheet" type="text/css" href="{%static 'music/styles.css'%}">
+
+</head>
+<body>
+<div class="image" >&nbsp</div>
+<img src="{%static 'music/images/images(6).jpg'%}">
+<ul>
+{%for album in album_all%}
+
+    <li>
+        <a href="{%url 'details' album.id %}">{{album.name}}</a>
+
+    </li>
+{%endfor%}
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,19 @@
+
+body
+{
+background:grey ;
+background:url("images/images(6).jpg") 50% 0 no-repeat fixed;
+}
+
+
+div.image
+{
+width:100px;
+hieght:100px;
+background:url("images/images(6).jpg");
+margin:0;
+padding:0;
+
+
+
+}
