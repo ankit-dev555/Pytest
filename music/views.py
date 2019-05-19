@@ -4,6 +4,7 @@ import _thread
 import sys
 import cv2
 import numpy as np
+import imutils
 import argparse
 import cv2
 import sys
@@ -52,6 +53,14 @@ def index(request):
     context={'album_all':album_all,    }
     request.session['abc']="abc"
     return render(request,"music/index.html",context)
+
+def index3(request):
+
+    if 'socket' in request.session:
+        print('yes')
+        request.session['socket'].close()
+
+    return render(request,"music/index_main.html")
 
 def details(request,album_id):
 
@@ -269,6 +278,187 @@ def index2(request):
         print("aborted")
 
 
+def detect_face(img):
+    # convert the test image to gray image as opencv face detector expects gray images
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    settings_dir = os.path.dirname(__file__)
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+
+    # load OpenCV face detector, I am using LBP which is fast
+    # there is also a more accurate but slow Haar classifier
+    face_cascade = cv2.CascadeClassifier(PROJECT_ROOT+'/opencv-files/lbpcascade_frontalface.xml')
+
+    # let's detect multiscale (some images may be closer to camera than others) images
+    # result is a list of faces
+    faces = face_cascade.detectMultiScale(gray, scaleFactor=1.2, minNeighbors=5);
+
+    # if no faces are detected then return original img
+    if (len(faces) == 0):
+        return None, None
+
+    # under the assumption that there will be only one face,
+    # extract the face area
+    (x, y, w, h) = faces[0]
+
+    # return only the face part of the image
+    return gray[y:y + w, x:x + h], faces[0]
+
+
+def prepare_training_data(data_folder_path):
+    settings_dir = os.path.dirname(__file__)
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+    dirs = os.listdir(PROJECT_ROOT+"/"+data_folder_path)
+    faces = []
+    labels = []
+
+    # let's go through each directory and read images within it
+    for dir_name in dirs:
+
+        # our subject directories start with letter 's' so
+        # ignore any non-relevant directories if any
+        if not dir_name.startswith("s"):
+            continue;
+
+        # ------STEP-2--------
+        # extract label number of subject from dir_name
+        # format of dir name = slabel
+        # , so removing letter 's' from dir_name will give us label
+        label = int(dir_name.replace("s", ""))
+
+        # build path of directory containin images for current subject subject
+        # sample subject_dir_path = "training-data/s1"
+        subject_dir_path = PROJECT_ROOT+"/"+data_folder_path + "/" + dir_name
+
+        # get the images names that are inside the given subject directory
+        subject_images_names = os.listdir(subject_dir_path)
+
+        # ------STEP-3--------
+        # go through each image name, read image,
+        # detect face and add face to list of faces
+        for image_name in subject_images_names:
+
+            # ignore system files like .DS_Store
+            if image_name.startswith("."):
+                continue;
+
+            # build image path
+            # sample image path = training-data/s1/1.pgm
+            image_path = subject_dir_path + "/" + image_name
+
+            # read image
+            image = cv2.imread(image_path)
+
+            # display an image window to show the image
+
+            # detect face
+            face, rect = detect_face(image)
+
+            # ------STEP-4--------
+            # for the purpose of this tutorial
+            # we will ignore faces that are not detected
+            if face is not None:
+                # add face to list of faces
+                faces.append(face)
+                # add label for this face
+                labels.append(label)
+
+
+    return faces, labels
+
+
+def draw_rectangle(img, rect):
+    (x, y, w, h) = rect
+    cv2.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+
+# function to draw text on give image starting from
+# passed (x, y) coordinates.
+def draw_text(img, text, x, y):
+    cv2.putText(img, text, (x, y), cv2.FONT_HERSHEY_PLAIN, 1.5, (0, 255, 0), 2)
+
+
+
+def gen2(request):
+    subjects = ["","Indresh","ankit","vinayak"]
+    faces, labels = prepare_training_data("training-data")
+    face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+    face_recognizer.train(faces, np.array(labels))
+    settings_dir = os.path.dirname(__file__)
+    PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
+
+    # load OpenCV face detector, I am using LBP which is fast
+    # there is also a more accurate but slow Haar classifier
+    face_cascade = cv2.CascadeClassifier(PROJECT_ROOT + '/opencv-files/lbpcascade_frontalface.xml')
+
+    HOST = "localhost"
+    PORT = 8089
+    if 'socket' in request.session:
+        print("yes")
+        print(request.session['socket'])
+    else:
+        print("no")
+
+    # request.session['socket']=True
+    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+    print('Socket created')
+
+    s.bind((HOST, PORT))
+    print('Socket bind complete')
+    s.listen(10)
+    print('Socket now listening')
+
+    conn, addr = s.accept()
+
+    data = b''
+    payload_size = struct.calcsize("L")
+    (width, height) = (130, 100)
+
+    while True:
+        while len(data) < payload_size:
+            data += conn.recv(4096)
+        packed_msg_size = data[:payload_size]
+        data = data[payload_size:]
+        msg_size = struct.unpack("L", packed_msg_size)[0]
+        while len(data) < msg_size:
+            data += conn.recv(4096)
+        frame_data = data[:msg_size]
+        data = data[msg_size:]
+        ###
+
+        frame = pickle.loads(frame_data)
+        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        faces = face_cascade.detectMultiScale(gray, 1.3, 5)
+        for (x, y, w, h) in faces:
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (255, 0, 0), 2)
+            face = gray[y:y + h, x:x + w]
+            face_resize = cv2.resize(face, (width, height))
+            # Try to recognize the face
+            prediction = face_recognizer.predict(face_resize)
+            cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
+
+            if prediction[1] < 500:
+
+                cv2.putText(frame, '% s - %.0f' %
+                            (subjects[prediction[0]], prediction[1]), (x - 10, y - 10),
+                            cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0))
+            else:
+                cv2.putText(frame, 'not recognized',
+                            (x - 10, y - 10), cv2.FONT_HERSHEY_PLAIN, 1, (0, 255, 0))
+
+
+        ret, jpeg = cv2.imencode('.jpg', frame)
+        frame = jpeg.tobytes()
+        yield (b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n\r\n')
+
+
+@gzip.gzip_page
+def index4(request):
+
+    try:
+        return StreamingHttpResponse(gen2(request),content_type="multipart/x-mixed-replace;boundary=frame")
+    except HttpResponseServerError as e:
+        print("aborted")
 
 
 

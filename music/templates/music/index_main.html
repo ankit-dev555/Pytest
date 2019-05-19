@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  {%load staticfiles%}
+  <title>Home</title>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta content="" name="keywords">
+  <meta content="" name="description">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <!-- Favicons -->
+  <link href="{%static 'img/favicon.png'%}" rel="icon">
+  <link href="{%static 'img/apple-touch-icon.png'%}" rel="apple-touch-icon">
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,700,700i|Raleway:300,400,500,700,800" rel="stylesheet">
+
+  <!-- Bootstrap CSS File -->
+  <link href="{%static 'lib/bootstrap/css/bootstrap.min.css'%}" rel="stylesheet">
+
+  <!-- Libraries CSS Files -->
+  <link href="{%static 'lib/font-awesome/css/font-awesome.min.css'%}" rel="stylesheet">
+  <link href="{%static 'lib/animate/animate.min.css'%}" rel="stylesheet">
+  <link href="{%static 'lib/venobox/venobox.css'%}" rel="stylesheet">
+  <link href="{%static 'lib/owlcarousel/assets/owl.carousel.min.css'%}" rel="stylesheet">
+
+  <!-- Main Stylesheet File -->
+  <link href="{%static 'css/style.css'%}" rel="stylesheet">
+
+  <!-- =======================================================
+    Theme Name: TheEvent
+    Theme URL: https://bootstrapmade.com/theevent-conference-event-bootstrap-template/
+    Author: BootstrapMade.com
+    License: https://bootstrapmade.com/license/
+  ======================================================= -->
+</head>
+
+<body>
+
+  <!--==========================
+    Header
+  ============================-->
+  <header id="header">
+    <div class="container">
+
+      <div id="logo" class="pull-left">
+        <!-- Uncomment below if you prefer to use a text logo -->
+        <!-- <h1><a href="#main">C<span>o</span>nf</a></h1>-->
+
+        </div>
+
+      <nav id="nav-menu-container">
+        <ul class="nav-menu">
+          <li class="menu-active"><a href="#intro">Home</a></li>
+          <li><a href="#about">About</a></li>
+          </ul>
+      </nav><!-- #nav-menu-container -->
+    </div>
+  </header><!-- #header -->
+
+  <!--==========================
+    Intro Section
+  ============================-->
+  <section id="intro" style="width:100%">
+    <div class="intro-container wow fadeIn w3-container">
+      <h1 class="mb-4 pb-0">Project On Object And Facial Recognition</h1>
+      <br>
+    <div class="w3-container w3-row" >
+     <div class="w3-container w3-half "> 
+      
+        <h4 class="w3-left w3-text-white">Click below button for object detection</h4>
+        <a href="{%url 'vstream1'%}" class="w3-left play-btn mb-4"></a>
+        </div><div class="w3-container w3-half">
+          <h4 class="w3-text-white " >Click below button for facial recognition</h4>
+          <a href="{%url 'vstream2'%}" class="w3-right play-btn mb-4" data-vbtype="video"
+        data-autoplay="true"></a>
+        
+      </div></div>
+      <a href="#about" class="about-btn scrollto">About The Project</a>
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!--==========================
+      About Section
+    ============================-->
+    <section id="about">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <h2>About The Project</h2>
+            <p>The project is based on computer vision and recognition.This is a project on object and facial recognition using openCV and MobileNetSSD (model trained on COCO DATASET)</p>
+          </div>
+          <div class="col-lg-3">
+            <h3>Group Members</h3>
+            <p>Ankit Kumar Singh (15207)</p>
+            <p>Indresh Kumar Patel (15217)</p>
+            <p>Vinayak Baranwal (15246)</p>
+          </div>
+          <div class="col-lg-3">
+            <h3>Mentor</h3>
+            <p>Dr. Aruni Singh</p>
+            <h3>Professors</h3>
+            <p>Dr. Neelendra Badal</p>
+            <p>Prof. Awadhesh Kumar</p>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!--==========================
+      Speakers Section
+    ============================-->
+   
+    <!--==========================
+      Venue Section
+    ============================-->
+    
+    <!--==========================
+      Subscribe Section
+    ============================-->
+    <section id="subscribe">
+      <div class="container wow fadeInUp">
+        <div class="section-header">
+          <h2>Newsletter</h2>
+          <p>Subscribe to our website</p>
+        </div>
+
+        <form method="POST" action="#">
+          <div class="form-row justify-content-center">
+            <div class="col-auto">
+              <input type="text" class="form-control" placeholder="Enter your Email">
+            </div>
+            <div class="col-auto">
+              <button type="submit">Subscribe</button>
+            </div>
+          </div>
+        </form>
+
+      </div>
+    </section>
+
+    <!--==========================
+      Buy Ticket Section
+    ============================-->
+    
+    <!--==========================
+      Contact Section
+    ============================-->
+    
+  </main>
+
+
+  <!--==========================
+    Footer
+  ============================-->
+  
+  <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
+
+  <!-- JavaScript Libraries -->
+  <script src="{%static 'lib/jquery/jquery.min.js'%}"></script>
+  <script src="{%static 'lib/jquery/jquery-migrate.min.js'%}"></script>
+  <script src="{%static 'lib/bootstrap/js/bootstrap.bundle.min.js'%}"></script>
+  <script src="{%static 'lib/easing/easing.min.js'%}"></script>
+  <script src="{%static 'lib/superfish/hoverIntent.js'%}"></script>
+  <script src="{%static 'lib/superfish/superfish.min.js'%}"></script>
+  <script src="{%static 'lib/wow/wow.min.js'%}"></script>
+  <script src="{%static 'lib/venobox/venobox.min.js'%}"></script>
+  <script src="{%static 'lib/owlcarousel/owl.carousel.min.js'%}"></script>
+
+  <!-- Contact Form JavaScript File -->
+  <script src="{%static 'contactform/contactform.js'%}"></script>
+
+  <!-- Template Main Javascript File -->
+  <script src="{%static 'js/main.js'%}"></script>
+</body>
+
+</html>
