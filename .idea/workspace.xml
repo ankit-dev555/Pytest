@@ -1,25 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5871dd2e-d360-4a58-8403-38088412bed9" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/music/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s1/IMG20190519132000.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s1/IMG20190519132003.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s1/IMG20190519132008.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s1/IMG20190519132011.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s1/IMG20190519132017.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s2/IMG20190519124023.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s2/IMG20190519124024.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s2/IMG20190519124025.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s2/IMG20190519124026.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s3/IMG-20190519-WA0000.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s3/IMG-20190519-WA0001.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s3/IMG-20190519-WA0002.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s3/IMG-20190519-WA0003.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s3/IMG-20190519-WA0004.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/training-data/s3/IMG-20190519-WA0005.jpg" beforeDir="false" />
-    </list>
+    <list default="true" id="5871dd2e-d360-4a58-8403-38088412bed9" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,8 +46,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/music/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="393" column="98" selection-start-line="393" selection-start-column="98" selection-end-line="393" selection-end-column="98" />
+            <state relative-caret-position="-539">
+              <caret line="397" column="35" lean-forward="true" selection-start-line="397" selection-start-column="35" selection-end-line="397" selection-end-column="35" />
               <folding>
                 <element signature="e#0#13#0" expanded="true" />
               </folding>
@@ -172,7 +154,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="67" />
     <option name="y" value="27" />
     <option name="width" value="687" />
@@ -452,8 +434,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/music/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="393" column="98" selection-start-line="393" selection-start-column="98" selection-end-line="393" selection-end-column="98" />
+        <state relative-caret-position="-539">
+          <caret line="397" column="35" lean-forward="true" selection-start-line="397" selection-start-column="35" selection-end-line="397" selection-end-column="35" />
           <folding>
             <element signature="e#0#13#0" expanded="true" />
           </folding>
