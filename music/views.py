@@ -381,7 +381,7 @@ def draw_text(img, text, x, y):
 
 
 def gen2(request):
-    subjects = ["","Indresh","ankit","vinayak"]
+    subjects = ["","Indresh","ankit","vinaayak"]
     faces, labels = prepare_training_data("training-data")
     face_recognizer = cv2.face.LBPHFaceRecognizer_create()
     print(labels)
