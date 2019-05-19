@@ -286,7 +286,7 @@ def detect_face(img):
 
     # load OpenCV face detector, I am using LBP which is fast
     # there is also a more accurate but slow Haar classifier
-    face_cascade = cv2.CascadeClassifier(PROJECT_ROOT+'/opencv-files/lbpcascade_frontalface.xml')
+    face_cascade = cv2.CascadeClassifier(PROJECT_ROOT+'/opencv-files/haarcascade_frontalface_alt.xml')
 
     # let's detect multiscale (some images may be closer to camera than others) images
     # result is a list of faces
@@ -344,7 +344,8 @@ def prepare_training_data(data_folder_path):
             # build image path
             # sample image path = training-data/s1/1.pgm
             image_path = subject_dir_path + "/" + image_name
-
+            print(image_path)
+            print(label)
             # read image
             image = cv2.imread(image_path)
 
@@ -361,7 +362,8 @@ def prepare_training_data(data_folder_path):
                 faces.append(face)
                 # add label for this face
                 labels.append(label)
-
+            else:
+                print("yes")
 
     return faces, labels
 
@@ -382,13 +384,14 @@ def gen2(request):
     subjects = ["","Indresh","ankit","vinayak"]
     faces, labels = prepare_training_data("training-data")
     face_recognizer = cv2.face.LBPHFaceRecognizer_create()
+    print(labels)
     face_recognizer.train(faces, np.array(labels))
     settings_dir = os.path.dirname(__file__)
     PROJECT_ROOT = os.path.abspath(os.path.dirname(settings_dir))
 
     # load OpenCV face detector, I am using LBP which is fast
     # there is also a more accurate but slow Haar classifier
-    face_cascade = cv2.CascadeClassifier(PROJECT_ROOT + '/opencv-files/lbpcascade_frontalface.xml')
+    face_cascade = cv2.CascadeClassifier(PROJECT_ROOT + '/opencv-files/haarcascade_frontalface_alt.xml')
 
     HOST = "localhost"
     PORT = 8089
